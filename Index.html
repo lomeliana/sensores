@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<HTML>
+ <HEAD>
+
+	<TITLE>
+		PRUEBA LED - WIFI
+	</TITLE>
+
+	<link rel="stylesheet" type="text/css" href="estilos.css">>
+	</link>
+  </HEAD>
+     <BODY>
+      
+      <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDIMBYlbqn5WS0S4jqQTs3igkccLcgBOgc",
+    authDomain: "sensor-sp2023.firebaseapp.com",
+    databaseURL: "https://sensor-sp2023-default-rtdb.firebaseio.com",
+    projectId: "sensor-sp2023",
+    storageBucket: "sensor-sp2023.appspot.com",
+    messagingSenderId: "820682572462",
+    appId: "1:820682572462:web:f25644c6e5b186b1fbe33f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  import {
+  	get, getDatabase, child, ref, onValue
+  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+  const db = getDatabase();
+
+  var valor = ref(db, "SENSOR1");
+  onValue(valor, (snapshot) =>{
+  	valor = JSON.stringify(snapshot.val(), null, 3);
+  	if(valor == "1"){
+  		led.style.background = "green";
+  	}else{ // es cero
+  	     led.style.background = "red";
+  	 }
+  });
+</script>
+      <!--
+      	<p style="font-size: 40px;
+      	         border: 1px solid green;
+      	         background-color: 
+      	         #F0FF33;
+      	         margin-top: 30px;
+      	         margin-left: 15px;
+      	         padding: 15px;">
+      	SENSOR 1
+      	</p>>
+      		
+      	-->
+      	<DIV class="center fondo">
+         <H1>SENSOR 1</H1>
+         <SPAN id="led" class="punto"></SPAN>
+      </DIV>
+     </BODY>
+</HTML>
